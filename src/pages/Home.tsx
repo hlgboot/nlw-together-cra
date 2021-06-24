@@ -1,6 +1,8 @@
 import { useHistory } from 'react-router-dom'
 import { FormEvent, useState } from 'react'
 
+import toast, { Toaster } from 'react-hot-toast'
+
 import ilustrationImg from "../assets/images/illustration.svg"
 import logoImg from "../assets/images/logo.svg"
 import googleIconImg from "../assets/images/google-icon.svg"
@@ -33,12 +35,12 @@ export function Home() {
         const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
         if(!roomRef.exists()) {
-            alert('Room does not exists.')
+            toast.error('Room does not exists.')
             return
         }
 
         if(roomRef.val().endedAt) {
-            alert('Room alredy closed.')
+            toast.error('Room alredy closed.')
             return
         }
 
@@ -55,6 +57,7 @@ export function Home() {
 
     return (
         <div id="page-auth">
+            <Toaster position="top-center" reverseOrder={false} />
             <aside>
                 <img src={ilustrationImg} alt="Imagem simbolizando perguntas e respostas" />
                 <strong>Crie salas de Q&amp;A ao vivo</strong>

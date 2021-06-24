@@ -1,5 +1,11 @@
 import { useHistory, useParams } from "react-router"
-// import { useAuth } from "../hooks/useAuth"
+import { useAuth } from "../hooks/useAuth"
+import { useRoom } from "../hooks/useRoom"
+import { useEffect } from "react"
+
+import { database } from "../services/firebase"
+
+import { Toaster } from "react-hot-toast"
 
 import logoImg from "../assets/images/logo.svg"
 import deleteImg from "../assets/images/delete.svg"
@@ -9,8 +15,6 @@ import { RoomCode } from "../components/RoomCode"
 import { Question } from "../components/Question"
 
 import "../styles/room.scss"
-import { useRoom } from "../hooks/useRoom"
-import { database } from "../services/firebase"
 
 type RoomParams = {
     id: string
@@ -19,13 +23,32 @@ type RoomParams = {
 
 export function AdminRoom() {
     
-    const history = useHistory()
-
-    // const { user } = useAuth()
-
     const { id } = useParams<RoomParams>()
 
+    const history = useHistory()
+    
+    const { user } = useAuth()
+    
     const { questions, title } = useRoom(id)
+    
+    useEffect(() => {
+        const roomRef = database.ref(`rooms/${id}`)
+
+        roomRef.once('value', room => {
+            const creatorUser = room.val().authorId
+            
+            if(creatorUser !== user?.id) {
+                history.push('/')
+                return
+            }
+            
+        })
+
+        return () => {
+            roomRef.off('value')
+        }
+    }, [id])
+
 
     async function handleEndRoom() {
        await database.ref(`rooms/${id}`).update({
@@ -43,6 +66,7 @@ export function AdminRoom() {
 
     return (
         <div id="page-room">
+            <Toaster position='top-right' reverseOrder={false} />
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask Logo" />
