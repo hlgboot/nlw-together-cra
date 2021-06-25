@@ -59,6 +59,11 @@ export function Room() {
     }
 
     async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
+        if(!user) {
+            toast.error("You must to be logged in.")
+            return
+        }
+
         if(likeId) {
             await database.ref(`rooms/${id}/questions/${questionId}/like/${likeId}`).remove()
         } else {
