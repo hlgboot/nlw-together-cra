@@ -12,10 +12,10 @@ Letmeask help streamers who has multiples questions to anwser, we list the quest
 ## 💻 Techs
 
 For this project we use:
-    - [x] ReactJS with create-react-app template
-    - [x] Firebase for the social authentication and Realtime Database
-    - [x] SCSS for the styles
-    - [x] Typescript
+- [x] ReactJS with create-react-app template
+- [x] Firebase for the social authentication and Realtime Database
+- [x] SCSS for the styles
+- [x] Typescript
 
 ## 🚀 Want to run in your machine?
 
@@ -27,15 +27,15 @@ To run this aplication enter this commands in your terminal:\
 
 ## 🔨 Features
 This project includes this features to organize questions:
-    - [x] Send Question - USER
-    - [x] Like Question - USER
-    - [x] Start Room - ADMIN
-    - [x] Highlighted Question - ADMIN
-    - [x] Check Question - ADMIN
-    - [x] Remove Question - ADMIN
-    - [x] End Room - ADMIN
-    - [x] List Questions by likes and status
-    - [] Dark Mode - Comming soon                                                                                                                         
+- [x] Send Question - USER
+- [x] Like Question - USER
+- [x] Start Room - ADMIN
+- [x] Highlighted Question - ADMIN
+- [x] Check Question - ADMIN
+- [x] Remove Question - ADMIN
+- [x] End Room - ADMIN
+- [x] List Questions by likes and status
+- [] Dark Mode - Comming soon                                                                                                                         
 
 ##
 
