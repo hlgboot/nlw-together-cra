@@ -29,6 +29,7 @@ export function Home() {
         event.preventDefault()
 
         if(roomCode.trim() === '') {
+            toast.error('Type a room code.')
             return
         }
 
