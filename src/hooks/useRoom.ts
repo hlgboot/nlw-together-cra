@@ -55,8 +55,8 @@ export function useRoom(roomId: string) {
             })
             
             parsedQuestions.sort((a, b) => {
-                if(a.isHighlighted && !a.isAnswered) {
-                    return -1
+                if(b.isHighlighted && !b.isAnswered) {
+                    return 1
                 }
                 if(a.isAnswered) {
                     return 1

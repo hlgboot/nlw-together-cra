@@ -15,7 +15,9 @@ import { RoomCode } from "../components/RoomCode"
 import { Question } from "../components/Question"
 
 import "../styles/room.scss"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+
+import {Modal} from "../components/Modal"
 
 type RoomParams = {
     id: string
@@ -29,23 +31,29 @@ export function AdminRoom() {
     const history = useHistory()
 
     const { user } = useAuth()
-
+    
     useEffect(() => {
         const roomRef = database.ref(`rooms/${id}`)
-    
-        roomRef.once('value', room => {
-            const creatorUser = room.val().authorId
-            
-            if(creatorUser !== user?.id) {
-                history.push('/')
-            }
-        })
-    }, [])
+
+        if(user) {
+            roomRef.once('value', room => {
+                const creatorUser = room.val().authorId
+                
+                if(room.val().endedAt) {
+                    history.push('/')
+                }
+                if(creatorUser !== user?.id) {
+                    history.push('/')
+                }
+            })
+        }
+    }, [id, user, history])
     
     
     const { questions, title } = useRoom(id)
     
-
+    const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
+    const [isEndRoomModalOpen, setIsEndRoomModalOpen] = useState(false)
 
     async function handleEndRoom() {
        await database.ref(`rooms/${id}`).update({
@@ -55,10 +63,8 @@ export function AdminRoom() {
     } 
 
     async function handleDeleteQuestion(questionId: string) {
-        if(window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
-            const questionRef = database.ref(`rooms/${id}/questions/${questionId}`)
-            await questionRef.remove()
-        }
+        const questionRef = database.ref(`rooms/${id}/questions/${questionId}`)
+        await questionRef.remove()
     }
 
     async function handleCheckQuestionAsAnswered(questionId: string) {
@@ -83,7 +89,7 @@ export function AdminRoom() {
                         <img src={logoImg} alt="Letmeask Logo" />
                         <div>
                             <RoomCode code={id}/>
-                            <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+                            <Button isOutlined onClick={() => setIsEndRoomModalOpen(true)}>Encerrar sala</Button>
                         </div>
                     </div>
                 </header>
@@ -124,14 +130,27 @@ export function AdminRoom() {
                             }
 
                             <button 
-                                type='button' onClick={() => handleDeleteQuestion(question.id)}>
+                                type='button' onClick={() => setIsCancelModalOpen(true)}>
                                 <img src={deleteImg} alt="Delete Question" />
                             </button>
+
+                            <Modal 
+                            state={isCancelModalOpen} 
+                            setState={setIsCancelModalOpen} 
+                            callback={() => handleDeleteQuestion(question.id)} 
+                            title="Excluir pergunta" 
+                            content="Tem certeza que você deseja excluir esta pergunta?"/>
                         </Question>
                     ))}
                     </div>
                 </main>
-
+                <Modal 
+                state={isEndRoomModalOpen} 
+                setState={setIsEndRoomModalOpen} 
+                callback={handleEndRoom}
+                title="Encerrar sala" 
+                content="Tem certeza que você deseja encerrar esta sala?"/>
+                
         </div>
     )
 }

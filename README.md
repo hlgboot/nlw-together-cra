@@ -35,7 +35,7 @@ This project includes this features to organize questions:
 - [x] Remove Question - ADMIN
 - [x] End Room - ADMIN
 - [x] List Questions by likes and status
-- [] Dark Mode - Comming soon                                                                                                                         
+- [ ] Dark Mode - Comming soon                                                                                                                         
 
 ##
 
