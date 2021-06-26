@@ -43,7 +43,13 @@
             align-items: center;
             border: 0;
             cursor: pointer;
+            transition: filter 0.2s;
+
+            &:hover {
+                filter: brightness(0.9)
+            }
         }
+
 
         .cancel {
             background: #DBDCDD;

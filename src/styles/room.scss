@@ -109,5 +109,29 @@
         .questions-list {
             margin-top: 32px;
         }
+
+        .questionsEmpty {
+            margin-top: 256px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            font-family: 'Poppins', monospace;
+
+            h1 {
+                font-size: 18px;
+                color: #29292e;
+                margin-top: 16px;
+            }
+
+            p {
+                font-size: 14px;
+                color: #737380;
+                margin-top: 8px;
+                text-align: center;
+            }
+        }
     }
 }

@@ -35,6 +35,7 @@ This project includes this features to organize questions:
 - [x] Remove Question - ADMIN
 - [x] End Room - ADMIN
 - [x] List Questions by likes and status
+- [x] Modal to Close Room and Delete Question
 - [ ] Dark Mode - Comming soon                                                                                                                         
 
 ##
