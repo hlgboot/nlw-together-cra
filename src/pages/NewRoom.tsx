@@ -22,7 +22,7 @@ export function NewRoom() {
         if(!user) {
             history.push('/')
         }
-    }, [])
+    }, [user, history])
 
     async function handleCreateRoom(event: FormEvent) {
         event.preventDefault()
