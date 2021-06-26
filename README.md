@@ -9,6 +9,8 @@
 This project is an aplication build in the Next Level Week Together with ReactJS.\
 Letmeask help streamers who has multiples questions to anwser, we list the questions and offer features to improve this.
 
+Test yourself 🔥 [letmeask.com](https://letmeask-65812.web.app/)
+
 ## 💻 Techs
 
 For this project we use:
